@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <h1>Kuchnia Agaty</h1>
+
+    <h2>
+        Trochę Bliskiego Wschodu, trochę słodkości i trochę eksperymentów
+    </h2>
+
+    <p>
+        W końcu nie muszę spamować Cię plikiem z przepisami. 😅
+        Wszystko jest teraz tutaj, w jednym miejscu. Znajdziesz tu przepisy,
+        o których Ci opowiadałem, możesz przeliczać porcje, korzystać
+        z minutnika i gotować krok po kroku.
+    </p>
+
+    <p><strong>Miłego gotowania!</strong></p>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terracotta: {
+                            50: '#fff5f2',
+                            100: '#ffe8e1',
+                            500: '#e05a47',
+                            600: '#c84331',
+                            700: '#a63323',
+                        },
+
+                        sand: {
+                            50: '#fdfbf7',
+                            100: '#f7f2e8',
+                            200: '#eee3d0',
+                            300: '#e3d2b5',
+                            800: '#4a4035',
+                            900: '#2c251e',
+                        },
+
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#d97706',
+                        }
+                    },
+
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="min-h-screen flex flex-col antialiased bg-sand-100 text-sand-900">
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="sticky top-0 z-40 bg-sand-50/90 backdrop-blur-md border-b border-sand-200 shadow-sm">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+            <button onclick="resetFilters()" class="flex items-center gap-3 text-left"
+                aria-label="Wróć do wszystkich przepisów">
+
+                <div
+                    class="w-10 h-10 rounded-full bg-terracotta-600 flex items-center justify-center text-white text-xl shadow-md">
+                    🧆
+                </div>
+
+                <div>
+                    <h1 class="font-serif-title text-2xl font-bold tracking-tight text-sand-900">
+                        Przepisy Dla Agaty
+                    </h1>
+
+                    <p class="text-xs text-terracotta-700 font-medium tracking-wide uppercase">
+                        Kuchnia Bliskowschodnia & Słodkości
+                    </p>
+                </div>
+
+            </button>
+
+
+            <button onclick="toggleFavoritesFilter()" id="fav-filter-btn"
+                class="px-3.5 py-2 rounded-xl border border-sand-300 bg-white hover:bg-sand-100 text-sand-800 text-sm font-medium transition flex items-center gap-2 shadow-sm">
+                <i class="fa-solid fa-heart text-terracotta-500"></i>
+
+                <span class="hidden sm:inline">
+                    Ulubione
+                </span>
+
+                <span id="fav-count"
+                    class="bg-terracotta-100 text-terracotta-700 px-2 py-0.5 rounded-full text-xs font-bold">
+                    0
+                </span>
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="bg-gradient-to-b from-sand-200/60 to-sand-100 py-10 px-4 sm:px-6 lg:px-8 border-b border-sand-200">
+
+        <div class="max-w-4xl mx-auto text-center space-y-6">
+
+            <h2 class="font-serif-title text-3xl sm:text-4xl md:text-5xl font-bold text-sand-900 leading-tight">
+                Smaki Bliskiego Wschodu & Domowe Słodkości
+            </h2>
+
+            <p class="text-sand-800 max-w-2xl mx-auto text-sm sm:text-base">
+                Odkryj wyselekcjonowane przepisy przygotowane specjalnie dla Agaty.
+                Przeliczaj porcje, korzystaj z minutnika i gotuj krok po kroku.
+            </p>
+
+
+            <!-- SEARCH -->
+
+            <div class="relative max-w-xl mx-auto">
+
+                <i
+                    class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-sand-800 text-lg"></i>
+
+                <input type="search" id="search-input" oninput="handleSearch()"
+                    placeholder="Szukaj przepisu lub składnika..." autocomplete="off"
+                    class="w-full pl-11 pr-10 py-3.5 rounded-2xl border border-sand-300 bg-white shadow-md focus:ring-2 focus:ring-terracotta-500 focus:outline-none transition text-sm sm:text-base">
+
+                <button onclick="clearSearch()" id="clear-search"
+                    class="hidden absolute right-4 top-1/2 -translate-y-1/2 text-sand-800 hover:text-sand-900"
+                    aria-label="Wyczyść wyszukiwanie">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FILTERS ================= -->
+
+    <div
+        class="sticky top-20 z-30 bg-sand-50/95 backdrop-blur-md border-b border-sand-200 shadow-sm py-3 px-4 sm:px-6 lg:px-8">
+
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+
+            <div id="category-chips"
+                class="flex items-center gap-2 overflow-x-auto w-full md:w-auto hide-scrollbar py-1"></div>
+
+
+            <div
+                class="flex items-center gap-2 w-full md:w-auto overflow-x-auto hide-scrollbar pt-2 md:pt-0 border-t md:border-t-0 border-sand-200">
+
+                <span class="text-xs font-semibold uppercase text-sand-800 whitespace-nowrap mr-1">
+                    Filtry:
+                </span>
+
+                <button onclick="toggleTagFilter('wege')" id="tag-wege" class="filter-tag">
+                    🌱 Wege
+                </button>
+
+                <button onclick="toggleTagFilter('bez-pieczenia')" id="tag-bez-pieczenia" class="filter-tag">
+                    ❄️ Bez pieczenia
+                </button>
+
+                <button onclick="toggleTagFilter('szybkie')" id="tag-szybkie" class="filter-tag">
+                    ⚡ Szybkie (&lt; 20 min)
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= RECIPES ================= -->
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <div id="recipes-count" class="text-sm font-medium text-sand-800 mb-6">
+            Ładowanie przepisów...
+        </div>
+
+
+        <div id="recipes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"></div>
+
+
+        <!-- EMPTY STATE -->
+
+        <div id="empty-state" class="hidden text-center py-16 space-y-4">
+
+            <div
+                class="w-20 h-20 bg-sand-200 rounded-full flex items-center justify-center mx-auto text-3xl text-sand-800">
+                🔍
+            </div>
+
+            <h3 class="text-xl font-serif-title font-bold text-sand-900">
+                Nie znaleziono przepisów
+            </h3>
+
+            <p class="text-sand-800 max-w-md mx-auto text-sm">
+                Spróbuj zmienić słowa kluczowe lub wyczyścić wybrane filtry.
+            </p>
+
+            <button onclick="resetFilters()"
+                class="px-5 py-2.5 bg-terracotta-600 text-white font-medium rounded-xl shadow hover:bg-terracotta-700 transition">
+                Zresetuj filtry
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= TIMER ================= -->
+
+    <div id="global-timer-bar"
+        class="hidden fixed bottom-4 right-4 z-40 bg-sand-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-4 border border-gold-500/30">
+
+        <div class="flex items-center gap-2">
+
+            <i class="fa-solid fa-stopwatch text-gold-400 text-xl animate-pulse"></i>
+
+            <div>
+                <div class="text-xs text-sand-300" id="timer-label-display">
+                    Minutnik
+                </div>
+
+                <div class="font-mono text-lg font-bold text-gold-400" id="timer-time-display">
+                    00:00
+                </div>
+            </div>
+
+        </div>
+
+        <div class="flex items-center gap-1.5">
+
+            <button onclick="pauseResumeTimer()" id="timer-pause-btn"
+                class="p-2 hover:bg-sand-800 rounded-lg text-sand-200" aria-label="Pauza">
+                <i class="fa-solid fa-pause"></i>
+            </button>
+
+            <button onclick="stopTimer()" class="p-2 hover:bg-sand-800 rounded-lg text-terracotta-400"
+                aria-label="Zatrzymaj minutnik">
+                <i class="fa-solid fa-square"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= RECIPE MODAL ================= -->
+
+    <div id="recipe-modal"
+        class="hidden fixed inset-0 z-50 overflow-y-auto bg-sand-900/60 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4">
+
+        <div class="bg-sand-50 rounded-3xl max-w-4xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-sand-200 relative flex flex-col"
+            role="dialog" aria-modal="true" aria-labelledby="modal-title">
+
+            <!-- MODAL HEADER -->
+
+            <div
+                class="sticky top-0 z-20 bg-sand-50/90 backdrop-blur-md border-b border-sand-200 px-6 py-4 flex items-center justify-between">
+
+                <div class="flex items-center gap-3">
+
+                    <span id="modal-category-badge"
+                        class="px-3 py-1 rounded-full text-xs font-semibold bg-terracotta-100 text-terracotta-700"></span>
+
+                    <span id="modal-prep-badge"
+                        class="px-3 py-1 rounded-full text-xs font-semibold bg-sand-200 text-sand-800"></span>
+
+                </div>
+
+
+                <div class="flex items-center gap-2">
+
+                    <button onclick="toggleFavoriteModal()" id="modal-fav-btn"
+                        class="p-2.5 rounded-full bg-white border border-sand-300 hover:bg-sand-100 transition text-sand-800"
+                        aria-label="Dodaj do ulubionych">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+
+                    <button onclick="openCookingMode()"
+                        class="px-3.5 py-2 rounded-xl bg-terracotta-600 text-white text-xs font-semibold shadow hover:bg-terracotta-700 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-book-open"></i>
+
+                        <span class="hidden sm:inline">
+                            Tryb Gotowania
+                        </span>
+                    </button>
+
+                    <button onclick="closeModal()"
+                        class="p-2.5 rounded-full bg-white border border-sand-300 hover:bg-sand-100 transition text-sand-800"
+                        aria-label="Zamknij">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- MODAL BODY -->
+
+            <div class="p-6 sm:p-8 space-y-8 flex-grow">
+
+                <div>
+
+                    <div class="flex items-center gap-3 text-3xl sm:text-4xl mb-2">
+
+                        <span id="modal-icon"></span>
+
+                        <h2 id="modal-title" class="font-serif-title font-bold text-sand-900"></h2>
+
+                    </div>
+
+                    <p id="modal-description" class="text-sand-800 text-sm sm:text-base italic"></p>
+
+                </div>
+
+
+                <!-- VIDEO -->
+
+                <div id="modal-video-container"
+                    class="hidden rounded-2xl overflow-hidden shadow-md aspect-video border border-sand-300">
+                    <iframe id="modal-video-iframe" class="w-full h-full" title="Film instruktażowy" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+
+
+                <!-- SERVINGS -->
+
+                <div
+                    class="bg-white p-4 rounded-2xl border border-sand-200 flex flex-wrap items-center justify-between gap-4 shadow-sm">
+
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-users text-terracotta-600"></i>
+                        <span class="font-semibold text-sm">
+                            Liczba porcji:
+                        </span>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+
+                        <button onclick="changeServings(-1)"
+                            class="w-9 h-9 rounded-xl border border-sand-300 bg-sand-100 hover:bg-sand-200 font-bold text-lg flex items-center justify-center transition">
+                            −
+                        </button>
+
+                        <span id="modal-servings-count" class="font-bold text-lg w-8 text-center">
+                            1
+                        </span>
+
+                        <button onclick="changeServings(1)"
+                            class="w-9 h-9 rounded-xl border border-sand-300 bg-sand-100 hover:bg-sand-200 font-bold text-lg flex items-center justify-center transition">
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONTENT -->
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+                    <!-- INGREDIENTS -->
+
+                    <div class="lg:col-span-5 space-y-4">
+
+                        <div class="flex items-center justify-between border-b border-sand-200 pb-2">
+
+                            <h3 class="font-serif-title text-xl font-bold text-sand-900 flex items-center gap-2">
+                                <i class="fa-solid fa-basket-shopping text-terracotta-600 text-lg"></i>
+                                Składniki
+                            </h3>
+
+                            <button onclick="resetIngredientChecks()"
+                                class="text-xs text-terracotta-600 hover:underline">
+                                Odznacz wszystkie
+                            </button>
+
+                        </div>
+
+                        <ul id="modal-ingredients-list" class="space-y-2.5"></ul>
+
+                    </div>
+
+
+                    <!-- INSTRUCTIONS -->
+
+                    <div class="lg:col-span-7 space-y-4">
+
+                        <div class="flex items-center justify-between border-b border-sand-200 pb-2 gap-3">
+
+                            <h3 class="font-serif-title text-xl font-bold text-sand-900 flex items-center gap-2">
+                                <i class="fa-solid fa-utensils text-terracotta-600 text-lg"></i>
+                                Instrukcje
+                            </h3>
+
+                            <div class="flex items-center gap-1.5">
+
+                                <span class="text-xs text-sand-800">
+                                    Minutnik:
+                                </span>
+
+                                <button onclick="startPresetTimer(5)" class="timer-button">
+                                    5m
+                                </button>
+
+                                <button onclick="startPresetTimer(10)" class="timer-button">
+                                    10m
+                                </button>
+
+                                <button onclick="startPresetTimer(30)" class="timer-button">
+                                    30m
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <ol id="modal-instructions-list" class="space-y-3.5"></ol>
+
+
+                        <!-- TIPS -->
+
+                        <div id="modal-tips-container"
+                            class="hidden mt-6 bg-terracotta-50/70 border border-terracotta-100 p-4 rounded-2xl space-y-2">
+
+                            <h4 class="font-bold text-sm text-terracotta-700 flex items-center gap-2">
+                                <i class="fa-solid fa-lightbulb"></i>
+                                Wskazówki & Podanie
+                            </h4>
+
+                            <ul id="modal-tips-list"
+                                class="text-xs sm:text-sm text-sand-800 space-y-1 list-disc list-inside"></ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= COOKING MODE ================= -->
+
+    <div id="cooking-mode-modal" class="hidden fixed inset-0 z-50 bg-sand-900 text-sand-100 flex flex-col p-4 sm:p-8">
+
+        <div class="flex items-center justify-between border-b border-sand-800 pb-4 mb-6 max-w-4xl w-full mx-auto">
+
+            <div>
+
+                <span class="text-xs font-semibold text-gold-400 uppercase tracking-widest">
+                    Tryb Gotowania
+                </span>
+
+                <h2 id="cooking-title" class="font-serif-title text-2xl sm:text-3xl font-bold text-white"></h2>
+
+            </div>
+
+            <button onclick="closeCookingMode()"
+                class="px-4 py-2 rounded-xl bg-sand-800 hover:bg-sand-700 text-sm font-medium transition flex items-center gap-2">
+                <i class="fa-solid fa-xmark"></i>
+                Zamknij
+            </button>
+
+        </div>
+
+
+        <div
+            class="flex-grow max-w-3xl w-full mx-auto flex flex-col justify-center items-center text-center px-4 space-y-8">
+
+            <div class="text-gold-400 font-bold text-sm uppercase tracking-wider">
+                Krok
+                <span id="cooking-current-step">1</span>
+                z
+                <span id="cooking-total-steps">1</span>
+            </div>
+
+            <p id="cooking-step-text"
+                class="text-xl sm:text-3xl font-serif-title text-sand-100 leading-relaxed font-medium"></p>
+
+        </div>
+
+
+        <div class="max-w-3xl w-full mx-auto pt-6 border-t border-sand-800 flex items-center justify-between gap-4">
+
+            <button onclick="prevCookingStep()" id="cooking-prev-btn"
+                class="px-6 py-3 rounded-2xl bg-sand-800 hover:bg-sand-700 text-white font-medium transition disabled:opacity-40">
+                <i class="fa-solid fa-arrow-left mr-2"></i>
+                Poprzedni
+            </button>
+
+            <button onclick="nextCookingStep()" id="cooking-next-btn"
+                class="px-6 py-3 rounded-2xl bg-terracotta-600 hover:bg-terracotta-500 text-white font-bold transition">
+                Następny
+                <i class="fa-solid fa-arrow-right ml-2"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="bg-sand-200 border-t border-sand-300 py-8 mt-12 text-center text-sand-800 text-xs sm:text-sm">
+
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+
+            <p class="font-serif-title text-base font-semibold text-sand-900">
+                Przepisy Dla Agata ❤️
+            </p>
+
+            <p>
+                Stworzone z miłością do dobrego jedzenia i wspólnego gotowania.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- JS -->
+    <script src="js/recipes.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

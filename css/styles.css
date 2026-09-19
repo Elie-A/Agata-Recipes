@@ -1,0 +1,174 @@
+body {
+    background-color: #f7f2e8;
+    color: #2c251e;
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.font-serif-title {
+    font-family: "Playfair Display", serif;
+}
+
+
+/* ================================
+   SCROLLBAR
+================================ */
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+
+/* ================================
+   CHECKED ITEMS
+================================ */
+
+.checked-item {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+
+/* ================================
+   TIMER
+================================ */
+
+@keyframes pulse-subtle {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
+}
+
+.timer-active {
+    animation: pulse-subtle 2s infinite ease-in-out;
+}
+
+
+/* ================================
+   FILTER BUTTONS
+================================ */
+
+.filter-tag {
+    padding: 0.25rem 0.75rem;
+
+    border: 1px solid #e3d2b5;
+    border-radius: 0.5rem;
+
+    background: white;
+
+    color: #4a4035;
+
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    transition:
+        background-color 0.2s,
+        border-color 0.2s,
+        color 0.2s;
+}
+
+.filter-tag:hover {
+    background-color: #f7f2e8;
+}
+
+.filter-tag.active {
+    background-color: #ffe8e1;
+    border-color: #e05a47;
+    color: #a63323;
+}
+
+
+/* ================================
+   TIMER BUTTONS
+================================ */
+
+.timer-button {
+    padding: 0.25rem 0.5rem;
+
+    background: #eee3d0;
+
+    border-radius: 0.375rem;
+
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    transition: background-color 0.2s;
+}
+
+.timer-button:hover {
+    background: #e3d2b5;
+}
+
+
+/* ================================
+   RECIPE CARDS
+================================ */
+
+.recipe-card {
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.recipe-card:hover {
+    transform: translateY(-4px);
+}
+
+
+/* ================================
+   MODALS
+================================ */
+
+#recipe-modal,
+#cooking-mode-modal {
+    overscroll-behavior: contain;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 640px) {
+
+    #recipe-modal > div {
+        max-height: 96vh;
+        border-radius: 1.5rem;
+    }
+
+    #global-timer-bar {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+    }
+}
+
+
+/* ================================
+   REDUCED MOTION
+================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
