@@ -428,7 +428,7 @@ function createRecipeCard(recipe) {
 
                     <span class="px-2.5 py-1 rounded-lg bg-sand-100 text-sand-800 text-xs font-medium">
                         <i class="fa-regular fa-clock"></i>
-                        ${recipe.prepTime}
+                        Czas całkowity: ${recipe.prepTime}
                     </span>
 
                     <span class="px-2.5 py-1 rounded-lg bg-terracotta-50 text-terracotta-700 text-xs font-medium">
