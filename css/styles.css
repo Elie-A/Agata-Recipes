@@ -2,6 +2,9 @@ body {
     background-color: #f7f2e8;
     color: #2c251e;
     font-family: "Plus Jakarta Sans", sans-serif;
+
+    /* Prevent accidental horizontal scrolling on mobile */
+    overflow-x: hidden;
 }
 
 .font-serif-title {
@@ -38,6 +41,7 @@ body {
 ================================ */
 
 @keyframes pulse-subtle {
+
     0%,
     100% {
         transform: scale(1);
@@ -58,13 +62,13 @@ body {
 ================================ */
 
 .filter-tag {
-    padding: 0.25rem 0.75rem;
+    min-height: 40px;
+    padding: 0.5rem 0.85rem;
 
     border: 1px solid #e3d2b5;
-    border-radius: 0.5rem;
+    border-radius: 0.625rem;
 
     background: white;
-
     color: #4a4035;
 
     font-size: 0.75rem;
@@ -73,19 +77,27 @@ body {
     white-space: nowrap;
 
     transition:
-        background-color 0.2s,
-        border-color 0.2s,
-        color 0.2s;
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.15s ease;
 }
 
 .filter-tag:hover {
     background-color: #f7f2e8;
 }
 
+.filter-tag:active {
+    transform: scale(0.97);
+}
+
 .filter-tag.active {
     background-color: #ffe8e1;
     border-color: #e05a47;
     color: #a63323;
+
+    box-shadow: 0 0 0 2px rgba(224, 90, 71, 0.12);
 }
 
 
@@ -94,20 +106,29 @@ body {
 ================================ */
 
 .timer-button {
-    padding: 0.25rem 0.5rem;
+    min-width: 40px;
+    min-height: 40px;
+
+    padding: 0.5rem;
 
     background: #eee3d0;
 
-    border-radius: 0.375rem;
+    border-radius: 0.5rem;
 
     font-size: 0.75rem;
     font-weight: 500;
 
-    transition: background-color 0.2s;
+    transition:
+        background-color 0.2s,
+        transform 0.15s;
 }
 
 .timer-button:hover {
     background: #e3d2b5;
+}
+
+.timer-button:active {
+    transform: scale(0.95);
 }
 
 
@@ -121,6 +142,9 @@ body {
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
+
+    /* Prevent long recipe titles from breaking the layout */
+    overflow: hidden;
 }
 
 .recipe-card:hover {
@@ -139,20 +163,161 @@ body {
 
 
 /* ================================
+   TOUCH DEVICES
+================================ */
+
+@media (hover: none) and (pointer: coarse) {
+
+    .recipe-card:hover {
+        transform: none;
+    }
+
+    .filter-tag:active,
+    .timer-button:active {
+        transform: scale(0.97);
+    }
+}
+
+/* ================================
    MOBILE
 ================================ */
 
 @media (max-width: 640px) {
 
-    #recipe-modal > div {
-        max-height: 96vh;
-        border-radius: 1.5rem;
+    body {
+        font-size: 15px;
     }
 
+
+    /* ----------------------------
+       RECIPE MODAL
+    ---------------------------- */
+
+    #recipe-modal {
+        padding: 0.5rem;
+    }
+
+    #recipe-modal>div {
+        width: 100%;
+        max-height: 96vh;
+
+        border-radius: 1.25rem;
+    }
+
+    #recipe-modal .p-6 {
+        padding: 1.25rem;
+    }
+
+    #recipe-modal .sm\:p-8 {
+        padding: 1.25rem;
+    }
+
+
+    /* ----------------------------
+       MODAL HEADER
+    ---------------------------- */
+
+    #recipe-modal .sticky {
+        padding: 0.75rem 1rem;
+    }
+
+    #recipe-modal .sticky button {
+        min-width: 40px;
+        min-height: 40px;
+    }
+
+
+    /* ----------------------------
+       RECIPE TITLE
+    ---------------------------- */
+
+    #modal-title {
+        font-size: 1.75rem;
+        line-height: 1.15;
+    }
+
+
+    /* ----------------------------
+       RECIPE DESCRIPTION
+    ---------------------------- */
+
+    #modal-description {
+        line-height: 1.6;
+    }
+
+
+    /* ----------------------------
+       SERVINGS
+    ---------------------------- */
+
+    #recipe-modal .bg-white {
+        padding: 0.875rem;
+    }
+
+
+    /* ----------------------------
+       INGREDIENTS / INSTRUCTIONS
+    ---------------------------- */
+
+    #recipe-modal li {
+        line-height: 1.5;
+    }
+
+
+    /* ----------------------------
+       VIDEO
+    ---------------------------- */
+
+    #modal-video-container {
+        border-radius: 1rem;
+    }
+
+
+    /* ----------------------------
+       TIMER
+    ---------------------------- */
+
     #global-timer-bar {
-        left: 1rem;
-        right: 1rem;
-        bottom: 1rem;
+        left: 0.75rem;
+        right: 0.75rem;
+        bottom: 0.75rem;
+
+        max-width: none;
+    }
+}
+
+
+/* ================================
+   VERY SMALL PHONES
+================================ */
+
+@media (max-width: 380px) {
+
+    #recipe-modal {
+        padding: 0.25rem;
+    }
+
+    #recipe-modal>div {
+        border-radius: 1rem;
+    }
+
+    #recipe-modal .p-6,
+    #recipe-modal .sm\:p-8 {
+        padding: 1rem;
+    }
+
+    #modal-title {
+        font-size: 1.5rem;
+    }
+
+    .filter-tag {
+        min-height: 38px;
+        padding: 0.45rem 0.7rem;
+    }
+
+    .timer-button {
+        min-width: 38px;
+        min-height: 38px;
     }
 }
 

@@ -102,23 +102,18 @@ function selectCategory(category) {
 ========================================================= */
 
 function toggleTagFilter(tag) {
-
-    const button =
-        document.getElementById(`tag-${tag}`);
-
     if (activeTags.includes(tag)) {
-
-        activeTags =
-            activeTags.filter(item => item !== tag);
-
-        button.classList.remove("active");
-
+        activeTags = activeTags.filter(item => item !== tag);
     } else {
-
         activeTags.push(tag);
-
-        button.classList.add("active");
     }
+
+    const button = document.getElementById(`tag-${tag}`);
+
+    button.classList.toggle(
+        "active",
+        activeTags.includes(tag)
+    );
 
     filterAndRender();
 }
