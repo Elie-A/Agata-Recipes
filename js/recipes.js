@@ -766,5 +766,51 @@ const recipesData = [
         ],
 
         tips: []
+    },
+
+    {
+        id: "flourless-chocolate-banana-protein-cake",
+        title: "Czekoladowe ciasto bananowe z białkiem (bez mąki)",
+        subtitle: "Z patelni, z polewą z czekolady 100%",
+        category: "Desery",
+        icon: "🍫",
+        prepTime: "5 min przygotowania + 18-25 min gotowania",
+        difficulty: "Łatwy",
+        tags: ["deser", "czekolada", "banan", "białko", "bez mąki"],
+        servings: 4,
+
+        ingredients: [
+            { name: "dojrzałe banany", amount: 2, unit: "szt." },
+            { name: "jajka", amount: 2, unit: "szt." },
+            { name: "odżywka białkowa", amount: 30, unit: "g" },
+            { name: "niesłodzone kakao", amount: 1, unit: "łyżka" },
+            { name: "jogurt grecki", amount: 2, unit: "łyżki" },
+            { name: "miód", amount: 2, unit: "łyżki" },
+            { name: "ekstrakt waniliowy", amount: 1, unit: "łyżeczka" },
+            { name: "woda z kwiatów pomarańczy", amount: 0.5, unit: "łyżeczki" },
+            { name: "proszek do pieczenia", amount: 0.5, unit: "łyżeczki" },
+            { name: "kropelki czekoladowe", amount: 1, unit: "łyżka" },
+            { name: "sól", amount: null, unit: "szczypta" },
+            { name: "czekolada 100%", amount: null, unit: "30-40 g (na polewę)" },
+            { name: "olej kokosowy lub mleko", amount: 1, unit: "łyżeczka (opcjonalnie)", optional: true }
+        ],
+
+        instructions: [
+            "Rozgnieć widelcem dojrzałe banany w misce, aż będą w większości gładkie.",
+            "Dodaj jajka, jogurt grecki, miód, ekstrakt waniliowy i wodę z kwiatów pomarańczy. Dokładnie wymieszaj.",
+            "Wsyp odżywkę białkową, kakao, proszek do pieczenia i sól. Wymieszaj na gładką masę, a następnie delikatnie wmieszaj kropelki czekoladowe.",
+            "Lekko natłuść małą patelnię z nieprzywierającą powłoką i wlej ciasto. Przykryj pokrywką i gotuj na najmniejszym ogniu przez 18-25 minut.",
+            "Po 18 minutach sprawdź środek ciasta. Będzie gotowe, gdy środek się zetnie i całkowicie upiecze. Temperatura wewnątrz ciasta powinna osiągnąć 71°C. Czas zależy od patelni i grubości ciasta.",
+            "Delikatnie roztop czekoladę w kuchence mikrofalowej, podgrzewając ją krótkimi seriami, albo w żaroodpornej misce ustawionej nad gotującą się wodą. Jeśli chcesz uzyskać gładszą polewę, dodaj odrobinę oleju kokosowego lub mleka.",
+            "Rozsmaruj roztopioną czekoladę na cieście. Odstaw na 10-15 minut, aby polewa stężała, i pokrój na porcje."
+        ],
+
+        tips: [
+            "Użyj bardzo dojrzałych bananów, aby ciasto było naturalnie słodsze.",
+            "Szczypta soli podkreśla smak czekolady i równoważy gorycz czekolady 100%.",
+            "Woda z kwiatów pomarańczy nadaje delikatny kwiatowy aromat, więc nie dodawaj jej zbyt dużo.",
+            "Utrzymuj bardzo mały ogień, aby spód się nie przypalił, zanim zetnie się środek.",
+            "Aby uzyskać bardziej wilgotną, zwartą konsystencję, ostudź ciasto przed pokrojeniem."
+        ]
     }
 ];
